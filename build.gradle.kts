@@ -1,6 +1,7 @@
 buildscript {
     dependencies {
         // ... other project dependencies
+        // Configure Firebase App
         // in tutorial was "com.google.gms:google-services:4.3.10" but the latest version is: "com.google.gms:google-services:4.4.3"
         classpath("com.google.gms:google-services:4.4.3")
     }
