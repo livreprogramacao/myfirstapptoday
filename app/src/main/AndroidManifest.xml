@@ -2,15 +2,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/><!-- bénéficier d'un accès complet au réseau -->    
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/><!-- exécuter un service de premier plan -->    
+    <uses-permission android:name="android.permission.VIBRATE"/><!-- contrôler le vibreur -->    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/><!-- afficher les connexions réseau -->    
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/><!-- afficher les connexions Wi-Fi -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+
     <application
+		android:hardwareAccelerated="true"
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
+        android:name=".Applications"
+        android:requestLegacyExternalStorage="true"
+        android:resizeableActivity="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -18,10 +28,39 @@
             android:theme="@style/Theme.MyApplication.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DebugActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <service
+            android:label="Hero DNSTT"
+            android:name="com.mahboub.herodnsttt.TunnelVpnService"
+            android:exported="false"
+            android:enabled="true"
+            android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="android.net.VpnService"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="com.mahboub.herodnsttt.SocksHttpService"
+            android:label="VPN Service">
+        </service>
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="4.0">
+		</meta-data>
+		<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-999~999">
+		</meta-data>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false">
+        </uses-library>
     </application>
 
 </manifest>
